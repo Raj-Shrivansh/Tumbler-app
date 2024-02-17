@@ -37,7 +37,7 @@ gem 'devise', '~> 4.9', '>= 4.9.3'
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data", platforms: %i[ windows jruby ]
-
+gem 'bootstrap', '~> 4.6', '>= 4.6.2'
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
 
