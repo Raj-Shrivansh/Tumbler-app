@@ -1,3 +1,13 @@
-<h1><%= @post.title %></h1>
-<p>submitted <%= time_ago_in_words(@post.created_at) %> ago</p>
-<p><%= @post.content %></p>
+<%= link_to 'Back', root_path,class:"btn btn-warning mt-2"%>
+<div class="card mt-3">
+  <h5 class="card-header">Post By Raj</h5>
+  <div class="card-body">
+    <h2 class="card-title font-weight-bold text-primary"><%= @post.title %></h2>
+    <p>Created <%= time_ago_in_words(@post.created_at) %> ago | <%= link_to "Edit",edit_post_path(@post)%> | <%= link_to "Delete",@post,data: {turbo_method: 'delete', turbo_confirm: "Are you sure"}%></p>
+    <p class="card-text"><%= @post.content%></p>
+    <a href="#" class="btn btn-primary">Go somewhere</a>
+  </div>
+  <div class="card-footer text-muted">
+    <span>Updated <%= time_ago_in_words(@post.updated_at) %> ago</span>
+  </div>
+</div>

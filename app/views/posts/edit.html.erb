@@ -1,9 +1,9 @@
-<%= link_to 'Back',root_path,class:"btn btn-warning mt-2"%> 
+<%= link_to 'Back',post_path(@post),class:"btn btn-warning mt-2"%> 
 <hr>
-<h3 class="text-center">Make Post</h3>
-<%= form_with scope: :post,:url=>{action:"create"} do |f| %>
+<h3 class="text-center">Edit Post</h3>
+<%= simple_form_for(@post) do |f| %>
 <div class="form-group">
-    <%= f.label :"Title"%>
+    <%= f.label :"Title :"%>
     <%= f.text_field :title,class:"form-control",placeholder:"Enter Title of Post",required:true%>
     <% if @post.errors %>
         <% @post.errors.full_messages_for(:title).each do |error| %>
@@ -12,7 +12,7 @@
         <% end %>
 </div>
 <div class="form-group">
-    <%= f.label :"Content"%>
+    <%= f.label :"Content :"%>
     <%= f.text_area :content,class:"form-control",placeholder:"Enter Content of Post",required:true,rows: 10,cols: 10%>
     <% if @post.errors %>
         <% @post.errors.full_messages_for(:content).each do |error| %>
@@ -21,5 +21,5 @@
         <% end %>
 </div>
 <%= link_to 'Back',root_path,class:"btn btn-warning btn-lg" %>
-<%= f.submit "Create Post", class: 'btn btn-success btn-lg float-right' %>
+<%= f.submit "Update Post", class: 'btn btn-success btn-lg float-right' %>
 <% end %>
