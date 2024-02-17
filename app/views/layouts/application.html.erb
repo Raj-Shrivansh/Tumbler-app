@@ -6,7 +6,6 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
     <style>
@@ -64,6 +63,35 @@
 .navbar{
     top:0;
 }
+#my_form {
+  min-width:300px;
+  max-width:400px;
+  padding:20px;
+  margin:0 auto;
+  background:#ffffff59; 
+  -webkit-box-shadow: 3px 3px 23px -9px rgba(0,0,0,0.86);
+  -moz-box-shadow: 3px 3px 23px -9px rgba(0,0,0,0.86);
+  box-shadow: 3px 3px 23px -9px rgba(0,0,0,0.86);
+}
+
+#my_form input {
+  border:1px solid #353935;
+  border-radius:0 !important;
+  padding:5px 8px;
+  color:black;
+}
+
+#my_form button {
+  color:#555;
+  background:#ffffffad;
+  border:1px solid #fff !important;
+  margin-top:20px;
+  border-radius:0px Important;
+}
+
+#my_form button:hover {
+  background:#fff !important;
+}
 @media screen and (max-width: 768px) {
     .sidebar {
         width: 0;
@@ -78,6 +106,18 @@
     .content {
         margin-left: 0;
     }
+    
+}
+footer {
+  background-color: white;
+  text-align: center;
+  color: #f9532d;
+}
+footer a {
+  color: #f9532d;
+}
+.container{
+  min-height:80vh;
 }
     </style>
   </head>
@@ -85,27 +125,46 @@
     <header>
 <div class="sidebar" id="sidebar">
     <a href="/">TUMBLER</a>
-    <a href="#">Home</a>
+    <%= link_to 'Home', root_path%>
     <%= link_to 'Make Post',  new_post_path%>
-    <a href="#">Login</a>
-    <a href="#">Signup</a>
-    <a href="#">Logout</a>
+    <%= link_to 'About us',  about_path%>
+    <% if !user_signed_in? %>
+    <%= link_to 'Login',   new_user_session_path%>
+    <%= link_to 'Signup',   new_user_registration_path%>
+    <% end %>
 </div>
     </header>
     <div class="content">
         <nav class="navbar navbar-light navbar-expand-lg" style="background-color: #e3f2fd;">
       <div class="hamburger" onclick="toggleSidebar()">&#9776;</div>
         <span class="navbar-brand mb-0 mt-0 h1 ml-5">Post Feed</span>
+        <% if user_signed_in?%>
     <ul class="navbar-nav ml-auto">
       <li class="nav-item active">
-        <%= link_to 'Make Post',new_post_path,class:"btn btn-outline-info float-right"%>
+        <%= link_to 'Make Post',new_post_path,class:"btn btn-outline-info mr-5 mb-1"%>
+      </li>
+      <li class="nav-item active">
+        <%= link_to 'Logout',destroy_user_session_path,data: {turbo_method: 'delete', turbo_confirm: "Are you sure"},class:"btn btn-outline-danger"%>
       </li>
       </ul>
+      <% end %>
             </nav>
+        <% flash.each do |type,msg| %>
+        <div class="alert alert-<%= type=="notice" ? "success" : "danger"%> alert-dismissible fade show" role="alert">
+        <%= msg %>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <% end %>
         <div class="container">
         <%= yield %>
         </div>
     </div>
+    <footer class="mt-4">
+      <span>
+      <a href="#">Raj Shrivansh</a> | &nbsp;<span class="far fa-copyright">&nbsp;&nbsp;</span>2024 All Rights Reserved.</span>
+    </footer>
   </body>
   <script>
           function toggleSidebar() {
@@ -119,4 +178,11 @@
   </script>
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script>
+    $('document').ready(function (){ 
+      $('.alert').fadeOut(4000);
+      $("abbr").removeAttr("title");
+     })
+  </script>
 </html>

@@ -1,0 +1,36 @@
+<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name),html: {id: 'my_form',class:"mt-5"}) do |f| %>
+<h2 class="text-center">Sign up</h2>
+  <div class="form-group">
+    <%= f.label :"Email :"%>
+    <%= f.email_field :email,required:true,placeholder:"Enter Your Email :",class:"form-control"%>
+    <% if resource.errors %>
+      <% resource.errors.full_messages_for(:email).each do |err| %>
+        <p style="color:red;font-size:1rem"><%= err %></p>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="form-group">
+    <%= f.label :"Password :"%>
+    <%= f.password_field :password,required:true,placeholder:"Enter Your Password",class:"form-control"%>
+    <% if resource.errors %>
+      <% resource.errors.full_messages_for(:password).each do |err| %>
+        <p style="color:red;font-size:1rem"><%= err %></p>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="form-group">
+    <%= f.label :"Password Confirmation:"%>
+    <%= f.password_field :password_confirmation,required:true,placeholder:"Enter Your Confirm Password",class:"form-control"%>
+    <% if resource.errors %>
+      <% resource.errors.full_messages_for(:password_confirmation).each do |err| %>
+        <p style="color:red;font-size:1rem"><%= err %></p>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="form-actions">
+    <%= f.button :submit, "Sign up" ,class:"btn btn-block btn-danger"%>
+  </div>
+  <br>
+  <%= render "devise/shared/links" %>
+<% end %>
+
