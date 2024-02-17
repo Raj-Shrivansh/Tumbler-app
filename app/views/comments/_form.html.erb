@@ -1,0 +1,11 @@
+<%= simple_form_for([@post, @post.comments.build]) do |f| %>
+<div class="form-group">
+    <%= f.label :"Name :"%>
+    <%= f.text_field :name,class:"form-control"%>
+</div>
+<div class="form-group">
+    <%= f.label :"Comment :"%>
+    <%= f.text_area :body,class:"form-control",placeholder:"Enter Your Comment ......"%>
+</div>
+<%= f.submit "Add Comment",class:"btn btn-lg btn-info float-right"%>
+<% end %>

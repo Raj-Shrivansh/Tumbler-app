@@ -1,0 +1,4 @@
+<h3 class="pl-2"><%=comment.body %></h3>
+<p style="font-size:1rem">--posted by <strong><%= comment.name %></strong> at <%=time_ago_in_words(comment.created_at) %> <span class="float-right"><%= link_to 'Delete Comment',[comment.post, comment],data: {turbo_method: 'delete', turbo_confirm: "Are you sure"},class:"btn btn-danger"%></span></p>
+
+<hr>
